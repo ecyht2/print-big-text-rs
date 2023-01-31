@@ -1,6 +1,8 @@
 # Print Big Text Rust
 A rust library that prints a given text in it’s ascii-art form.
 
+The C++ implementation of the library can be found [here](https://github.com/ecyht2/EEEE2065-cw1)
+
 ## Installation
 
 ### Dependency
