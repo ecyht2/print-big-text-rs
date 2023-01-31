@@ -38,6 +38,8 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Build with rustdoc
         run: cargo doc --no-deps
+      - name: Adding symlink to index.html
+        run: ln -s $(pwd)/print_big_text_rs/index.html ./
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
