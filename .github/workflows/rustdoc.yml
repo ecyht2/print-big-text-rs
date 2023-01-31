@@ -39,7 +39,7 @@ jobs:
       - name: Build with rustdoc
         run: cargo doc --no-deps
       - name: Adding index.html
-        run: echo '<meta http-equiv="refresh" content="0"; url=print_big_text_rs/index.html" />' > ./target/doc/index.html
+        run: echo '<meta http-equiv="refresh" content="0"; url=https://ecyht2.github.io/print-big-text-rs/print_big_text_rs/index.html" />' > ./target/doc/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
