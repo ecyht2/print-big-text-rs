@@ -1,5 +1,55 @@
 //! A rust library that prints a given text in it's ascii-art form.
 //!
+//! # Using the [BigText] Struct
+//!
+//! There are two ways to print the asii-art. The first is using the
+//! [print](BigText::print) method and using the [println] macro via the
+//! [Display] trait.
+//!
+//! ## Using [print](BigText::print) method.
+//!
+//! ```rust
+//! use print_big_text_rs::BigText;
+//! let printer = BigText::new("HI", None);
+//! printer.print(None);
+//! ```
+//!
+//! [BigText] struct also implements [Display] trait. This allows printing of the ascii-art
+//! using macros provided by [std].
+//!
+//! ```rust
+//! use print_big_text_rs::BigText;
+//! let printer = BigText::new("HI", None);
+//! println!("{}", printer);
+//! ```
+//!
+//! # Using CLI
+//!
+//! This package includes a binary crate to act as wrapper around the [BigText]
+//! struct. This uses the default [CharacterMap].
+//!
+//! ```sh
+//! cargo run "ABC" "0 == 1?"
+//! ```
+//!
+//! This will print to the console.
+//!
+//! ```sh
+//! string="ABC"
+//!  ***  ****    ***
+//! *   * *   *  *
+//! ***** ****  *
+//! *   * *   *  *
+//! *   * ****    ***
+//! string="0 == 1?"
+//! *****                             * ****
+//! *   *                             *     *
+//! *   *                             *   **
+//! *   *                             *
+//! *****                             *   *
+//! ```
+//!
+//! **Note**: Unsupported character would be print as if it is a whitespace.
 
 #[allow(unused)]
 use std::{

@@ -13,26 +13,98 @@ static WHITESPACE: &str = include_str!("whitespace.json");
 pub type CharacterMap = HashMap<char, [String; 5]>;
 
 /// Returns a [CharacterMap] only containing asii letters.
+///
+/// # Supported Characters
+///
+/// - A
+/// - B
+/// - C
+/// - D
+/// - E
+/// - F
+/// - G
+/// - H
+/// - I
+/// - J
+/// - K
+/// - L
+/// - M
+/// - N
+/// - O
+/// - P
+/// - Q
+/// - R
+/// - S
+/// - T
+/// - U
+/// - V
+/// - W
+/// - X
+/// - Y
+/// - Z
 pub fn ascii_letters() -> CharacterMap {
     serde_json::from_str(LETTERS).unwrap()
 }
 
 /// Returns a [CharacterMap] only containing digits.
+///
+/// # Supported Characters
+///
+/// - 0
+/// - 1
+/// - 2
+/// - 3
+/// - 4
+/// - 5
+/// - 6
+/// - 7
+/// - 8
+/// - 9
 pub fn digits() -> CharacterMap {
     from_json(DIGITS).unwrap()
 }
 
 /// Returns a [CharacterMap] only containing punctuations.
+///
+/// # Supported Characters
+///
+/// - !
+/// - @
+/// - \#
+/// - $
+/// - %
+/// - ^
+/// - &
+/// - \*
+/// - (
+/// - )
+/// - [
+/// - ]
+/// - ;
+/// - \\
+/// - ,
+/// - .
+/// - ?
 pub fn punctuation() -> CharacterMap {
     from_json(PUNCTUATION).unwrap()
 }
 
 /// Returns a [CharacterMap] only containing whitepaces.
+///
+/// # Supported Characters
+///
+/// - " " (literal white space)
 pub fn whitespace() -> CharacterMap {
     from_json(WHITESPACE).unwrap()
 }
 
 /// Returns a [CharacterMap] containting all the characters of the previous maps.
+///
+/// # Supported Characters
+///
+/// This map is a combination of the maps returned by [ascii_letters], [digits],
+/// [punctuation] and [whitespace]. For more information about the support characters.
+/// See their respective documentation.
 pub fn printables() -> CharacterMap {
     let mut printables: CharacterMap = HashMap::new();
 

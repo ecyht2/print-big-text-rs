@@ -56,3 +56,7 @@ target/release/print-big-text-rs HI 123 By@
 ```
 
 **Note:** The program will print a blank letter if the character isn't supported.
+
+## TODO
+
+- Add CLI option for custom character maps.
