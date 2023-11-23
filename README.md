@@ -60,3 +60,6 @@ target/release/print-big-text-rs HI 123 By@
 ## TODO
 
 - Add CLI option for custom character maps.
+
+## Documentation
+The API documentation of the library can be found in the project [GitHub pages](https://ecyht2.github.io/print-big-text-rs/)
