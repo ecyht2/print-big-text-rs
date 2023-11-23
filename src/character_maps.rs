@@ -1,5 +1,5 @@
-//! A module containing functions that generates some useful character_maps used by
-//! the BigText struct.
+//! A module containing functions that generates some useful [CharacterMap]s used by
+//! the [BigText](crate::BigText) struct.
 
 use serde_json::Result;
 use std::collections::HashMap;
@@ -9,29 +9,32 @@ static DIGITS: &str = include_str!("digits.json");
 static PUNCTUATION: &str = include_str!("punctuation.json");
 static WHITESPACE: &str = include_str!("whitespace.json");
 
-/// Returns a `character_map` only containing asii letters.
-pub fn ascii_letters() -> HashMap<char, [String; 5]> {
+/// The [BigText](crate::BigText) type used by BigText struct.
+pub type CharacterMap = HashMap<char, [String; 5]>;
+
+/// Returns a [CharacterMap] only containing asii letters.
+pub fn ascii_letters() -> CharacterMap {
     serde_json::from_str(LETTERS).unwrap()
 }
 
-/// Returns a `character_map` only containing digits.
-pub fn digits() -> HashMap<char, [String; 5]> {
+/// Returns a [CharacterMap] only containing digits.
+pub fn digits() -> CharacterMap {
     from_json(DIGITS).unwrap()
 }
 
-/// Returns a `character_map` only containing punctuations.
-pub fn punctuation() -> HashMap<char, [String; 5]> {
+/// Returns a [CharacterMap] only containing punctuations.
+pub fn punctuation() -> CharacterMap {
     from_json(PUNCTUATION).unwrap()
 }
 
-/// Returns a `character_map` only containing whitepaces.
-pub fn whitespace() -> HashMap<char, [String; 5]> {
+/// Returns a [CharacterMap] only containing whitepaces.
+pub fn whitespace() -> CharacterMap {
     from_json(WHITESPACE).unwrap()
 }
 
-/// Returns a `character_map` containting all the characters of the previous maps.
-pub fn printables() -> HashMap<char, [String; 5]> {
-    let mut printables: HashMap<char, [String; 5]> = HashMap::new();
+/// Returns a [CharacterMap] containting all the characters of the previous maps.
+pub fn printables() -> CharacterMap {
+    let mut printables: CharacterMap = HashMap::new();
 
     printables.extend(ascii_letters());
     printables.extend(digits());
@@ -41,8 +44,8 @@ pub fn printables() -> HashMap<char, [String; 5]> {
     printables
 }
 
-/// Creates a `character_map` from a JSON string.
-fn from_json(map_data: &str) -> Result<HashMap<char, [String; 5]>> {
+/// Creates a [CharacterMap] from a JSON string.
+fn from_json(map_data: &str) -> Result<CharacterMap> {
     serde_json::from_str(map_data)
 }
 

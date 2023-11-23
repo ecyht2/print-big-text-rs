@@ -7,18 +7,20 @@ use std::{
     fmt::Display,
     io::{self, Error, Write},
 };
+
+use character_maps::CharacterMap;
 pub mod character_maps;
 
 /// A struct that prints strings in it's ascii-art form.
 ///
-/// The struct decides how to print a given character in the ascii-art form via the
-/// `character_map` variable stored in the struct. It is a
-/// [HashMap<char, [String, 5]>](std::collections::HashMap) where the keys is the character
-/// that is being printed and the values is an [array] of 5 [String] where at each
-/// index is what will be printed at each row when printing the ascii-art.
+/// The struct decides how to print a given character in the ascii-art form via a
+/// [CharacterMap]. It is a [HashMap<char, [String, 5]>](std::collections::HashMap)
+/// where the keys is the character that is being printed and the values is an
+/// [array] of 5 [String] where at each index is what will be printed at each row
+/// when printing the ascii-art.
 ///
 /// If the character in the currently stored string to print isn't in the supported
-/// characters (not a key in the `character_map`) it will print as a blank character
+/// characters (not a key in the [CharacterMap]) it will print as a blank character
 /// (5 spaces).
 ///
 /// # Examples
@@ -42,7 +44,7 @@ pub struct BigText {
     /// All the characters that can be printed.
     supported_characters: String,
     /// The chracter map used to decide how to print the ASCII text.
-    character_map: HashMap<char, [String; 5]>,
+    character_map: CharacterMap,
 }
 
 impl BigText {
@@ -60,10 +62,10 @@ impl BigText {
     /// [BigText] can also be created with custom maps:
     ///
     /// ```rust
-    /// use print_big_text_rs::BigText;
+    /// use print_big_text_rs::{character_maps::CharacterMap, BigText};
     /// use std::collections::HashMap;
     ///
-    /// let map: HashMap<char, [String; 5]> = HashMap::from([
+    /// let map: CharacterMap = HashMap::from([
     ///     (
     ///         'H',
     ///         [
@@ -88,7 +90,7 @@ impl BigText {
     ///
     /// let printer: BigText = BigText::new("HI", Some(map));
     /// ```
-    pub fn new(text: &str, character_map: Option<HashMap<char, [String; 5]>>) -> Self {
+    pub fn new(text: &str, character_map: Option<CharacterMap>) -> Self {
         let text = String::from(text);
 
         // Setting map to default map if None is given
@@ -213,7 +215,7 @@ impl BigText {
     }
 
     /// Gets all the supported characters in the character_map.
-    fn get_supported_characters(map: &HashMap<char, [String; 5]>) -> String {
+    fn get_supported_characters(map: &CharacterMap) -> String {
         let mut supported_characters = String::new();
 
         for key in map.keys() {
@@ -227,10 +229,10 @@ impl BigText {
     ///
     /// # Examples
     /// ```rust
-    /// use print_big_text_rs::{character_maps, BigText};
+    /// use print_big_text_rs::{character_maps::{self, CharacterMap}, BigText};
     /// use std::collections::HashMap;
     ///
-    /// let map: HashMap<char, [String; 5]> = HashMap::from([
+    /// let map: CharacterMap = HashMap::from([
     ///     (
     ///         'A',
     ///         [
@@ -248,7 +250,7 @@ impl BigText {
     /// printer.set_character_map(map.clone());
     /// assert_eq!(&map, printer.character_map());
     /// ```
-    pub fn set_character_map(&mut self, character_map: HashMap<char, [String; 5]>) {
+    pub fn set_character_map(&mut self, character_map: CharacterMap) {
         self.character_map = character_map;
         // Resetting supported_characters
         self.supported_characters = Self::get_supported_characters(&self.character_map);
@@ -264,7 +266,7 @@ impl BigText {
     /// let printer = BigText::new("", None);
     /// assert_eq!(&character_maps::printables(), printer.character_map());
     /// ```
-    pub fn character_map(&self) -> &HashMap<char, [String; 5]> {
+    pub fn character_map(&self) -> &CharacterMap {
         &self.character_map
     }
 }
