@@ -4,8 +4,8 @@
 #[allow(unused)]
 use std::{
     collections::HashMap,
-    io::{self, Error, Write},
     fmt::Display,
+    io::{self, Error, Write},
 };
 pub mod character_maps;
 
